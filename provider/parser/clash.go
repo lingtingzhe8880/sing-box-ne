@@ -802,7 +802,7 @@ func parseHysteriaClash(proxy map[string]any) (option.Outbound, error) {
 	if upRaw, exists := proxy["up"]; exists {
 		switch up := upRaw.(type) {
 		case string:
-			options.Up = up
+			options.Up.UnmarshalJSON([]byte(up))
 		case int:
 			options.UpMbps = up
 		}
@@ -810,7 +810,7 @@ func parseHysteriaClash(proxy map[string]any) (option.Outbound, error) {
 	if downRaw, exists := proxy["down"]; exists {
 		switch down := downRaw.(type) {
 		case string:
-			options.Down = down
+			options.Down.UnmarshalJSON([]byte(down))
 		case int:
 			options.DownMbps = down
 		}
